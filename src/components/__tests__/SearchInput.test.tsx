@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SearchInput } from '../SearchInput';
 
@@ -131,7 +131,7 @@ describe('SearchInput', () => {
     const input = screen.getByPlaceholderText('Search articles...');
 
     // Type quickly
-    await user.type(input, 'rapid typing test', { delay: 1 });
+    await user.type(input, 'rapid typing test');
 
     // onSearch should be called for each character change
     expect(mockOnSearch).toHaveBeenCalledWith('rapid typing test');

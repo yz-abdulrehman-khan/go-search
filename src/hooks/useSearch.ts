@@ -76,7 +76,7 @@ const searchReducer = (state: SearchState, action: SearchAction): SearchState =>
 
 export const useSearch = () => {
   const [state, dispatch] = useReducer(searchReducer, initialState);
-  const debounceTimerRef = useRef<NodeJS.Timeout>();
+  const debounceTimerRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const currentRequestRef = useRef<AbortController | null>(null);
 
   const search = useCallback(async (query: string, debounceMs: number = 300) => {

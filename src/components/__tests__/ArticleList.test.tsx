@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ArticleList } from '../ArticleList';
 import type { Article } from '../../types';
@@ -101,9 +101,7 @@ describe('ArticleList', () => {
     render(<ArticleList {...defaultProps} articles={[]} total={0} query="nonexistent" />);
 
     expect(screen.getByText(/no results found/i)).toBeInTheDocument();
-    expect(screen.getByText((content, element) => {
-      return element && element.textContent === 'No articles match "nonexistent". Try different keywords or check your spelling.';
-    })).toBeInTheDocument();
+    expect(screen.getByText('No articles match "nonexistent". Try different keywords or check your spelling.')).toBeInTheDocument();
   });
 
   it('handles articles without summaries gracefully', () => {

@@ -17,7 +17,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   className,
 }) => {
   const [value, setValue] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
+  const [, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
