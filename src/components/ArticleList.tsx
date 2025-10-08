@@ -1,5 +1,5 @@
 import React from 'react';
-import { Article } from '../types';
+import type { Article } from '../types';
 import { ArticleCard } from './ArticleCard';
 import { LoadingCard } from './LoadingCard';
 import { clsx } from 'clsx';

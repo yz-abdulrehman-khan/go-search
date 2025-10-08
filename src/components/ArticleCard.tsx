@@ -1,5 +1,5 @@
 import React from 'react';
-import { Article } from '../types';
+import type { Article } from '../types';
 import { clsx } from 'clsx';
 import { FileText, Clock } from 'lucide-react';
 
