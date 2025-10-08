@@ -1,4 +1,4 @@
-import type { SearchResponse } from '../types';
+import type { SearchResponse } from '../types/index';
 
 // Mock data generator
 const generateMockArticles = (page: number, pageSize: number, query: string): SearchResponse => {
