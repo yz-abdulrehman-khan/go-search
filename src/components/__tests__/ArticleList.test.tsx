@@ -101,7 +101,7 @@ describe('ArticleList', () => {
     render(<ArticleList {...defaultProps} articles={[]} total={0} query="nonexistent" />);
 
     expect(screen.getByText(/no results found/i)).toBeInTheDocument();
-    expect(screen.getByText((content, element) => {
+    expect(screen.getByText((_, element) => {
       return element?.textContent === 'No articles match "nonexistent". Try different keywords or check your spelling.';
     })).toBeInTheDocument();
   });
