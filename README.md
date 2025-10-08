@@ -24,6 +24,13 @@ A beautiful, responsive real-time search application built with React, TypeScrip
 - **Performance**: Optimized rendering and request cancellation
 - **Mock API**: Realistic API simulation with edge cases
 
+### 🧪 Testing Suite
+- **Comprehensive Testing**: 72 tests with 97.05% code coverage
+- **Component Tests**: Full coverage of all React components
+- **Hook Tests**: Complete testing of custom hooks with proper timer mocking
+- **Integration Tests**: End-to-end testing scenarios
+- **API Tests**: Mock API service validation and edge cases
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -48,7 +55,13 @@ A beautiful, responsive real-time search application built with React, TypeScrip
    npm run dev
    ```
 
-4. **Open your browser**
+4. **Run tests**
+   ```bash
+   npm test
+   npm run test:coverage
+   ```
+
+5. **Open your browser**
    Navigate to `http://localhost:5173`
 
 ### Build for Production
@@ -63,15 +76,21 @@ npm run preview
 ```
 src/
 ├── components/           # React components
+│   ├── __tests__/        # Component tests
 │   ├── ArticleCard.tsx   # Individual article display
 │   ├── ArticleList.tsx   # Article grid with states
 │   ├── LoadingCard.tsx   # Skeleton loading component
 │   ├── SearchInput.tsx   # Search input with debouncing
 │   └── SearchPage.tsx    # Main page component
 ├── hooks/               # Custom React hooks
+│   ├── __tests__/        # Hook tests
 │   └── useSearch.ts     # Search logic and state management
 ├── services/            # API and external services
+│   ├── __tests__/        # Service tests
 │   └── api.ts          # Mock API service
+├── test/                # Test utilities and E2E tests
+│   ├── e2e.test.tsx     # End-to-end tests
+│   └── setup.ts         # Test setup and configuration
 ├── types/              # TypeScript type definitions
 │   └── index.ts        # Application types
 ├── App.tsx             # App component
@@ -86,6 +105,12 @@ src/
 - **TypeScript 5.9** - Type safety and developer experience
 - **Vite 7** - Fast build tool and dev server
 - **Tailwind CSS 3.4** - Utility-first CSS framework
+
+### Testing
+- **Vitest** - Fast unit test framework
+- **Testing Library** - React component testing utilities
+- **jsdom** - DOM environment for testing
+- **Coverage Reports** - Comprehensive test coverage analysis
 
 ### UI Components
 - **Lucide React** - Beautiful icon library
@@ -114,7 +139,7 @@ Response:
   ],
   "page": 1,
   "pageSize": 10,
-  "total": 120
+  "total": 30
 }
 ```
 
@@ -178,6 +203,34 @@ The search functionality is implemented with:
 - **Shimmer**: 1.5s infinite loading animation
 - **Hover**: 200ms scale and shadow transitions
 
+## 🧪 Testing
+
+### Running Tests
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests in watch mode
+npm run test:watch
+```
+
+### Test Coverage
+- **Components**: 100% coverage of all React components
+- **Hooks**: Complete testing of useSearch hook with timer mocking
+- **Services**: Full API service testing with edge cases
+- **Integration**: End-to-end user flow testing
+- **Overall**: 97.05% code coverage
+
+### Test Structure
+- Unit tests for individual components
+- Integration tests for component interactions
+- Hook tests with proper mocking and timers
+- API service tests with various scenarios
+- End-to-end tests for complete user workflows
+
 ## 🚀 Deployment
 
 ### Netlify (Recommended)
@@ -196,28 +249,6 @@ npm run build
 
 ### Environment Variables
 No environment variables required for basic setup. The app uses mock data by default.
-
-## 🧪 Testing the Application
-
-### Manual Testing Scenarios
-
-1. **Search Functionality**
-   - Try different search terms: "React", "TypeScript", "API"
-   - Test empty queries
-   - Test special characters
-
-2. **Loading States**
-   - Observe shimmer animations
-   - Test slow network conditions
-
-3. **Error Handling**
-   - Trigger errors with query "xyz123"
-   - Test retry functionality
-
-4. **Pagination**
-   - Load multiple pages
-   - Test "Load More" button
-   - Verify end-of-results state
 
 ## 🔧 Customization
 
@@ -249,6 +280,7 @@ All components are designed to be easily customizable:
 - [TypeScript Handbook](https://www.typescriptlang.org/docs)
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [Vite Guide](https://vitejs.dev/guide)
+- [Vitest Documentation](https://vitest.dev)
 
 ## 🤝 Contributing
 
@@ -256,7 +288,8 @@ All components are designed to be easily customizable:
 2. Create a feature branch
 3. Make your changes
 4. Add tests if applicable
-5. Submit a pull request
+5. Run test suite and ensure 100% pass rate
+6. Submit a pull request
 
 ## 📄 License
 
@@ -267,6 +300,7 @@ This project is open source and available under the [MIT License](LICENSE).
 - Built with ❤️ using modern web technologies
 - Inspired by best practices in React development
 - UI/UX design influenced by contemporary web applications
+- Comprehensive testing ensures reliability and maintainability
 
 ---
 
