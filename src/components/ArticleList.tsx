@@ -2,8 +2,7 @@ import React from 'react';
 import type { Article } from '../types/index';
 import { ArticleCard } from './ArticleCard';
 import { LoadingCard } from './LoadingCard';
-import { clsx } from 'clsx';
-import { AlertCircle, Loader2, ChevronDown, Search } from 'lucide-react';
+import { AlertCircle, Loader2, Plus } from 'lucide-react';
 
 interface ArticleListProps {
   articles: Article[];
@@ -29,65 +28,43 @@ export const ArticleList: React.FC<ArticleListProps> = ({
   const isInitialLoad = loading && articles.length === 0;
   const isLoadingMore = loading && articles.length > 0;
 
-  // Empty state when no query
-  if (!query && articles.length === 0 && !loading) {
-    return (
-      <div className="text-center py-16">
-        <div className="w-24 h-24 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Search className="h-10 w-10 text-blue-500" />
-        </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          Discover Amazing Articles
-        </h3>
-        <p className="text-gray-600 max-w-md mx-auto">
-          Start typing in the search box above to find articles that match your interests.
-          Our collection includes thousands of articles on various topics.
-        </p>
-      </div>
-    );
-  }
-
   // No results for search query
   if (query && articles.length === 0 && !loading && !error) {
     return (
-      <div className="text-center py-16">
-        <div className="w-24 h-24 bg-gradient-to-br from-amber-50 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Search className="h-10 w-10 text-amber-500" />
-        </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          No articles found
-        </h3>
-        <p className="text-gray-600 max-w-md mx-auto mb-4">
-          No articles match your search for <span className="font-medium text-gray-900">"{query}"</span>.
-          Try adjusting your search terms or browse our other content.
-        </p>
-        <div className="text-sm text-gray-500">
-          💡 Try searching for "React", "TypeScript", or "API"
+      <div className="search-no-results">
+        <div className="search-no-results-content">
+          <div className="search-no-results-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="21 21-4.35-4.35"/>
+              <line x1="9" y1="9" x2="13" y2="13"/>
+              <line x1="13" y1="9" x2="9" y2="13"/>
+            </svg>
+          </div>
+          <h3 className="search-no-results-title">No results found</h3>
+          <p className="search-no-results-description">
+            No articles match "<strong>{query}</strong>". Try different keywords or check your spelling.
+          </p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="search-results">
       {/* Results header */}
       {(articles.length > 0 || loading) && query && (
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Search Results
+        <div className="search-results-header">
+          <div className="search-results-info">
+            <h2 className="search-results-title">
+              {total > 0 ? `${total.toLocaleString()} result${total !== 1 ? 's' : ''}` : 'Results'}
             </h2>
-            {total > 0 && (
-              <span className="px-3 py-1 bg-blue-50 text-blue-700 text-sm font-medium rounded-full">
-                {total.toLocaleString()} articles
-              </span>
+            {query && (
+              <p className="search-results-query">
+                for "{query}"
+              </p>
             )}
           </div>
-          {query && (
-            <div className="text-sm text-gray-600">
-              Showing results for <span className="font-medium text-gray-900">"{query}"</span>
-            </div>
-          )}
         </div>
       )}
 
@@ -136,47 +113,45 @@ export const ArticleList: React.FC<ArticleListProps> = ({
 
       {/* Load more section */}
       {(hasMore || isLoadingMore) && articles.length > 0 && !error && (
-        <div className="flex justify-center pt-8">
+        <div className="load-more-section">
           <button
             onClick={onLoadMore}
             disabled={isLoadingMore}
-            className={clsx(
-              "flex items-center gap-3 px-8 py-4 rounded-xl font-medium transition-all duration-200",
-              "border border-gray-200 bg-white shadow-sm",
-              isLoadingMore
-                ? "text-gray-400 cursor-not-allowed"
-                : "text-gray-700 hover:bg-gray-50 hover:shadow-md hover:border-gray-300 active:scale-95"
-            )}
+            className="load-more-button"
           >
             {isLoadingMore ? (
               <>
-                <Loader2 className="h-5 w-5 animate-spin" />
-                <span>Loading more articles...</span>
+                <Loader2 size={16} className="animate-spin" />
+                Loading...
               </>
             ) : (
               <>
-                <ChevronDown className="h-5 w-5" />
-                <span>Load more articles</span>
+                <Plus size={16} />
+                Load more
               </>
             )}
           </button>
+          {hasMore && !isLoadingMore && (
+            <p className="load-more-info">
+              Showing {articles.length} of {total.toLocaleString()} articles
+            </p>
+          )}
         </div>
       )}
 
       {/* End of results indicator */}
       {!hasMore && articles.length > 0 && !loading && (
-        <div className="text-center py-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-green-50 to-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4">
-            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+        <div className="search-end-indicator">
+          <div className="search-end-content">
+            <div className="search-end-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
             </div>
+            <p className="search-end-text">
+              All {total.toLocaleString()} articles loaded
+            </p>
           </div>
-          <p className="text-gray-600 font-medium">
-            You've reached the end of the results
-          </p>
-          <p className="text-sm text-gray-500 mt-1">
-            Found {articles.length} of {total} articles
-          </p>
         </div>
       )}
     </div>

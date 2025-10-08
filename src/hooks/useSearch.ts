@@ -1,5 +1,5 @@
 import { useReducer, useCallback, useRef, useEffect } from 'react';
-import { SearchState, SearchAction } from '../types/index';
+import type { SearchState, SearchAction } from '../types/index';
 import { searchArticles } from '../services/api';
 
 const initialState: SearchState = {

@@ -2,11 +2,12 @@ import type { SearchResponse } from '../types/index';
 
 // Mock data generator
 const generateMockArticles = (page: number, pageSize: number, query: string): SearchResponse => {
-  const total = 120;
+  const total = 30;
   const startId = (page - 1) * pageSize + 1;
 
   const mockData = Array.from({ length: pageSize }, (_, index) => ({
     id: startId + index,
+    
     title: `${query ? `${query} - ` : ''}Article ${startId + index}: Advanced Techniques`,
     summary: `This is a comprehensive summary of article ${startId + index} about ${query || 'technology'}. It covers various aspects including implementation details, best practices, and real-world applications. The content is designed to be informative and engaging for readers interested in learning more about this topic.`
   }));
